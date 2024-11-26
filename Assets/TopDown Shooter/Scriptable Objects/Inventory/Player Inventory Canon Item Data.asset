@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3dceb4aa4e5a64f8960cd70f4e0256, type: 3}
+  m_Name: Player Inventory Canon Item Data
+  m_EditorClassIdentifier: 
+  _ItemID: default
+  _inventoryItemDataType: 0
+  _prefab: {fileID: 4656097161750468993, guid: 04bb771ffe98baf4cb61ab84dedcca65, type: 3}

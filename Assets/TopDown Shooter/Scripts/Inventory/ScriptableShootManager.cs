@@ -1,3 +1,4 @@
+using TopDownShooter.Stat;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -20,12 +21,19 @@ namespace TopDownShooter.Inventory
 
         public void Shoot(Vector3 origin, Vector3 direction)
         {
-            RaycastHit hit;
-            var physic = Physics.Raycast(origin, direction, out hit);
+            RaycastHit rHit;
+            var physic = Physics.Raycast(origin, direction, out rHit);
 
             if (physic)
             {
-                Debug.Log("Shoot find " + hit.collider.name);
+                Debug.Log("Shoot find " + rHit.collider.name);
+
+                int colliderInstanceID = rHit.collider.GetInstanceID();
+
+                if (DamageableHelper.DamageableList.ContainsKey(colliderInstanceID))
+                {
+                    DamageableHelper.DamageableList[colliderInstanceID].Damage(100);//Magic Number
+                }
             }
         }
     }

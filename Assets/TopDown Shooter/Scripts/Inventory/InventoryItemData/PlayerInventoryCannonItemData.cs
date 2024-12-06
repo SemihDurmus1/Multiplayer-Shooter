@@ -20,7 +20,7 @@ namespace TopDownShooter.Inventory
         public override void Initialize(PlayerInventoryController targetPlayerInventory)
         {
             base.Initialize(targetPlayerInventory);
-            InstantiateAndInitializePrefab(targetPlayerInventory.Parent);
+            InstantiateAndInitializePrefab(targetPlayerInventory.CannonParent);
 
             targetPlayerInventory.ReactiveShootCommand.Subscribe(OnReactiveShootCommand).
                 AddTo(_compositeDisposable);

@@ -32,7 +32,7 @@ namespace TopDownShooter.Inventory
 
                 if (DamageableHelper.DamageableList.ContainsKey(colliderInstanceID))
                 {
-                    DamageableHelper.DamageableList[colliderInstanceID].Damage(100);//Magic Number
+                    DamageableHelper.DamageableList[colliderInstanceID].Damage(10);//Magic Number
                 }
             }
         }

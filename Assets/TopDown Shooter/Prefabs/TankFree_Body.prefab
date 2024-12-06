@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4099009135072888547}
   - component: {fileID: 2993873583678011245}
   - component: {fileID: 1940509455457126017}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankFree_Wheel_b_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4870277930011823345}
   - component: {fileID: 4998322292090263721}
   - component: {fileID: 6950224635977550900}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankFree_Wheel_f_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 8493081058167144845}
   - component: {fileID: 2024978770076890038}
   - component: {fileID: 3917970542713103348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankFree_Wheel_b_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 7660306066747021940}
   - component: {fileID: 7236789832698267319}
   - component: {fileID: 2408060705538982800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankFree_Wheel_f_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,8 @@ GameObject:
   - component: {fileID: 4106219469392690757}
   - component: {fileID: 2097522304405450398}
   - component: {fileID: -1687583163762512115}
-  m_Layer: 0
+  - component: {fileID: 2242634759151508309}
+  m_Layer: 6
   m_Name: TankFree_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,3 +448,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3edd1aca66446374287a7250cc03f837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &2242634759151508309
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8586034488768677125}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.9107852, y: 1.3949685, z: 2.6642036}
+  m_Center: {x: 0.00000035762787, y: -0.07156944, z: -0.038929224}

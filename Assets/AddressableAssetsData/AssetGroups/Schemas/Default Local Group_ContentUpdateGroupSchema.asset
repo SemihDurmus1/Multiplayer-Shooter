@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3dceb4aa4e5a64f8960cd70f4e0256, type: 3}
-  m_Name: Player Inventory Canon Item Data
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: Default Local Group_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  _ItemID: default_canon
-  _inventoryItemDataType: 0
-  _prefab: {fileID: 4656097161750468993, guid: 04bb771ffe98baf4cb61ab84dedcca65, type: 3}
+  m_Group: {fileID: 11400000, guid: c1911a0dfba620643ab566047920060b, type: 2}
+  m_StaticContent: 0

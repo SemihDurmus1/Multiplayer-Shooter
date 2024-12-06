@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb55da9dd333b474cb6deb15af43e07a, type: 3}
   m_Name: Player Inventory Body Item Data
   m_EditorClassIdentifier: 
-  _ItemID: default
+  _ItemID: default_body
   _inventoryItemDataType: 1
   _prefab: {fileID: -1687583163762512115, guid: 76bf4f26c68cdbc48bd4a0b250e85d2d, type: 3}

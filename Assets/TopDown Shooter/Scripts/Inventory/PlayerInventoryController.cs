@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace TopDownShooter.Inventory
@@ -5,19 +7,60 @@ namespace TopDownShooter.Inventory
     public class PlayerInventoryController : MonoBehaviour
     {
         [SerializeField] private AbstractBasePlayerInventoryItemData[] _inventoryItemDataArray;
+        private List<AbstractBasePlayerInventoryItemData> _instantiatedItemDataList;
+
         public Transform Parent;
+
+        public ReactiveCommand ReactiveShootCommand { get; private set; }
+
         private void Start()
         {
             //FOR TESTING PURPOSES ONLY
             InitializeInventory(_inventoryItemDataArray);
         }
+        private void Update()
+        {
+
+        }
+
+        private void OnDestroy()
+        {
+            ClearInventory();
+        }
 
         public void InitializeInventory(AbstractBasePlayerInventoryItemData[] inventoryItemDataArray)
         {
-            for (int i = 0; i < _inventoryItemDataArray.Length; i++)
+            //adjusting reactive command
+            ReactiveShootCommand?.Dispose();//this question mark is a null conditional operator.
+            //For forbid any null exceptions
+
+            ReactiveShootCommand = new ReactiveCommand();
+
+            //clears old inventory and creates a new one
+            ClearInventory();
+            _instantiatedItemDataList = new List
+                <AbstractBasePlayerInventoryItemData>(inventoryItemDataArray.Length);
+
+            for (int i = 0; i < inventoryItemDataArray.Length; i++)
             {
-                inventoryItemDataArray[i].CreateIntoInventory(this);
+                var instantiated = Instantiate(inventoryItemDataArray[i]);
+
+                instantiated.Initialize(this);
+                _instantiatedItemDataList.Add(instantiated);
             }
         }
+
+        private void ClearInventory()
+        {
+            if (_instantiatedItemDataList != null)
+            {
+                for (int i = 0; i < _instantiatedItemDataList.Count; i++)
+                {
+                    _instantiatedItemDataList[i].Destroy();
+                }
+            }
+        }
+
+
     }
 }

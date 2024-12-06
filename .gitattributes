@@ -1,14 +1,9 @@
-# Genel olarak tüm metin dosyalarında satır sonu dönüşümünü otomatik yap
-* text=auto
+* text=auto eol=lf
 
-# C# dosyalarında (örneğin .cs uzantılı) LF kullanmasını zorunlu kıl
 *.cs eol=lf
-
-# JSON dosyalarında LF kullanmasını zorunlu kıl
 *.json eol=lf
 
-# Markdown dosyalarında (örneğin .md uzantılı) LF kullanmasını zorunlu kıl
-*.md eol=lf
-
-# Diğer metin dosyaları için de LF kullanabilirsiniz
-*.txt eol=lf
+*.shader eol=lf
+*.meta eol=lf
+*.prefab eol=lf
+*.unity eol=lf

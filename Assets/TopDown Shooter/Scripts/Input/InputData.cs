@@ -6,6 +6,7 @@ namespace TopDownShooter.PlayerInput
     public class InputData : ScriptableObject
     {
         public float Horizontal, Vertical;
+        [SerializeField] private float _increaseAmount = 0.015f;
 
         [Header("Axis Base Control")]
         [SerializeField] private bool _axisActive;
@@ -20,7 +21,6 @@ namespace TopDownShooter.PlayerInput
         [SerializeField] private bool _keyBaseVerticalActive;
         [SerializeField] private KeyCode PositiveVerticalKeyCode;
         [SerializeField] private KeyCode NegativeVerticalKeyCode;
-        [SerializeField] private float _increaseAmount = 0.015f;
 
         public void ProcessInput()
         {
@@ -59,7 +59,7 @@ namespace TopDownShooter.PlayerInput
                 value = 0;
             }
 
-            value = Mathf.Clamp(value, -1, 1);
+            value = Mathf.Clamp(value, -1, 1);//Smoothing calculation
 
         }
     }

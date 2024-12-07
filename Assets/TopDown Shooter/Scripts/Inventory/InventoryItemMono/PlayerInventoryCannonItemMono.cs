@@ -6,10 +6,17 @@ namespace TopDownShooter.Inventory
     {
         [SerializeField] private Transform _cannonShootPoint;
 
-        public void Shoot()
+        public void Shoot(IDamage damage)
         {
-            Debug.Log("Shoot is working");
-            ScriptableShootManager.Instance.Shoot(_cannonShootPoint.position, _cannonShootPoint.forward);
+            ScriptableShootManager.Instance.Shoot(_cannonShootPoint.position, _cannonShootPoint.forward, damage);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(_cannonShootPoint.position, .10f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(_cannonShootPoint.position, _cannonShootPoint.position + _cannonShootPoint.forward * 100);
         }
     }
 }

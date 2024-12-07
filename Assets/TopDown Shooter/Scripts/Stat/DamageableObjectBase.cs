@@ -1,3 +1,4 @@
+using TopDownShooter.Inventory;
 using UnityEngine;
 
 namespace TopDownShooter.Stat
@@ -24,10 +25,10 @@ namespace TopDownShooter.Stat
             transform.localScale = Vector3.Lerp(transform.localScale, (Health / 50) * _defaultScale, Time.deltaTime);
         }
 
-        public virtual void Damage(float damage)
+        public virtual void Damage(IDamage dmg)
         {
-            Health -= damage;
-            Debug.Log(gameObject.name + " damaged " + damage + " current health: " + Health);
+            Health -= dmg.Damage;
+            Debug.Log(gameObject.name + " damaged " + dmg + " current health: " + Health);
 
             if (Health <= 0)
             {

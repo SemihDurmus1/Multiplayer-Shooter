@@ -1,7 +1,6 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+using TopDownShooter.Inventory;
+
 
 namespace TopDownShooter.Stat
 {
@@ -24,6 +23,6 @@ namespace TopDownShooter.Stat
     public interface IDamageable
     {
         public int InstanceID { get; }
-        public void Damage(float damage);
+        public void Damage(IDamage dmg);
     }
 }

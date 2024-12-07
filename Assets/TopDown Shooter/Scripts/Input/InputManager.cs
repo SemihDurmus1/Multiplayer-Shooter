@@ -4,7 +4,7 @@ namespace TopDownShooter.PlayerInput
 {
     public class InputManager : MonoBehaviour
     {
-        [SerializeField] private InputData[] _inputDataArray;
+        [SerializeField] private PlayerInputData[] _inputDataArray;
 
 
         private void Update()

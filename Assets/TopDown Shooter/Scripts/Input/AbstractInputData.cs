@@ -6,9 +6,6 @@ namespace TopDownShooter.PlayerInput
     {
         public float Horizontal, Vertical;
 
-        public abstract void ProcessInput()
-        {
-
-        }
+        public abstract void ProcessInput();
     }
 }

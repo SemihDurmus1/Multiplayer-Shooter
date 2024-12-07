@@ -1,7 +1,6 @@
 using UniRx;
 using UnityEngine;
 
-
 namespace TopDownShooter.Inventory
 {
     [CreateAssetMenu(menuName = "TopDownShooter/Inventory/Player Inventory Canon Item Data")]
@@ -11,8 +10,14 @@ namespace TopDownShooter.Inventory
         [SerializeField] private float _damage;
         public float Damage { get { return _damage; } }
 
+
         [SerializeField] private float _rpm = 1f;//Shoot duration
         public float RPM { get { return _rpm; } }
+
+
+        [Range(0.1f, 2)]
+        [SerializeField] private float _armorPenetration = 3f;
+        public float ArmorPenetration { get { return _armorPenetration; } }
 
         private float _lastShootTime;
 
@@ -43,7 +48,7 @@ namespace TopDownShooter.Inventory
             Debug.Log("Shoot Started");
             if (Time.time - _lastShootTime > _rpm)
             {
-                _instantiated.Shoot();
+                _instantiated.Shoot(this);
                 _lastShootTime = Time.time;
             }
             else

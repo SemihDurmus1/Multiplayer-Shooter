@@ -15,3 +15,7 @@ MonoBehaviour:
   _ItemID: red_canon
   _inventoryItemDataType: 0
   _prefab: {fileID: 4656097161750468993, guid: 2a2b82fa6409f85479a8f81e2fba5b4c, type: 3}
+  _instantiated: {fileID: 0}
+  _damage: 20
+  _rpm: 0.25
+  _armorPenetration: 3

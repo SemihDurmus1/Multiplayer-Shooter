@@ -18,4 +18,5 @@ MonoBehaviour:
   _instantiated: {fileID: 0}
   _damage: 20
   _rpm: 0.25
-  _armorPenetration: 3
+  _armorPenetration: 2
+  _timeBasedDamage: 0

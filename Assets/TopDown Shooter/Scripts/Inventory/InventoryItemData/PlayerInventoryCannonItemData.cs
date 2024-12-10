@@ -7,6 +7,8 @@ namespace TopDownShooter.Inventory
 
     public class PlayerInventoryCannonItemData : AbstractPlayerInventoryItemData<PlayerInventoryCannonItemMono>, IDamage
     {
+        private float _lastShootTime;
+
         [SerializeField] private float _damage;
         public float Damage { get { return _damage; } }
 
@@ -19,7 +21,17 @@ namespace TopDownShooter.Inventory
         [SerializeField] private float _armorPenetration = 3f;
         public float ArmorPenetration { get { return _armorPenetration; } }
 
-        private float _lastShootTime;
+        [Header("Time Base Damage")]
+        [SerializeField] private float _timeBasedDamage = 3f;
+        public float TimeBasedDamage { get { return TimeBasedDamage; } }
+
+
+        [SerializeField] private float _timeBasedDamageDuration = 3f;
+        public float TimeBasedDamageDuration { get { return _timeBasedDamageDuration; } }
+
+
+        
+
 
         public override void Initialize(PlayerInventoryController targetPlayerInventory)
         {
@@ -29,7 +41,7 @@ namespace TopDownShooter.Inventory
             targetPlayerInventory.ReactiveShootCommand.Subscribe(OnReactiveShootCommand).
                 AddTo(_compositeDisposable);
 
-            Debug.Log("Canon Item Data Class");
+            //Debug.Log("Canon Item Data Class");
         }
 
 
@@ -53,7 +65,7 @@ namespace TopDownShooter.Inventory
             }
             else
             {
-                Debug.LogAssertion("U can't shoot now",this);
+                Debug.LogWarning("U can't shoot now",this);
             }
         }
     }

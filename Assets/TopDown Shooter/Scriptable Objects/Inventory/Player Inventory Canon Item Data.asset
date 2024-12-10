@@ -19,3 +19,4 @@ MonoBehaviour:
   _damage: 20
   _rpm: 0.25
   _armorPenetration: 2
+  _timeBasedDamage: 0

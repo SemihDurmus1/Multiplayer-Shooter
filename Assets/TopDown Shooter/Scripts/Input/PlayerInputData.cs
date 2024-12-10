@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TopDownShooter.PlayerInput
 {
-    [CreateAssetMenu(menuName = "TopDownShooter/Input/Input Data")]
+    [CreateAssetMenu(menuName = "TopDownShooter/Input/Player Input Data")]
     public class PlayerInputData : AbstractInputData
     {
         [SerializeField] private float _increaseAmount = 0.015f;

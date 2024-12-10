@@ -23,7 +23,7 @@ namespace TopDownShooter.Inventory
 
         [Header("Time Base Damage")]
         [SerializeField] private float _timeBasedDamage = 3f;
-        public float TimeBasedDamage { get { return TimeBasedDamage; } }
+        public float TimeBasedDamage { get { return _timeBasedDamage; } }
 
 
         [SerializeField] private float _timeBasedDamageDuration = 3f;

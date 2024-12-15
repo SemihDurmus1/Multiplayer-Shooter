@@ -4,7 +4,7 @@ using UniRx;
 using System.Collections;
 
 namespace TopDownShooter.Network {
-    public enum PlayerNetworkState { Offline, Connecting, Connected, InRoom}
+    public enum PlayerNetworkState { Offline, Connecting, Connected, JoiningRoom, InRoom}
 
     public class MatchMakingController : PunBehaviour
     {
@@ -18,19 +18,36 @@ namespace TopDownShooter.Network {
         {
             Instance = this;
 
-            MessageBroker.Default.Publish
-                (new EventPlayerNetworkStateChange(PlayerNetworkState.Offline));
+
 
         }
 
         private IEnumerator Start()
         {
+            MessageBroker.Default.Publish
+                (new EventPlayerNetworkStateChange(PlayerNetworkState.Offline));
+
             yield return new WaitForSeconds(_delayToConnect);
 
             MessageBroker.Default.Publish
                 (new EventPlayerNetworkStateChange(PlayerNetworkState.Connecting));
 
             PhotonNetwork.ConnectUsingSettings(_networkVersion);
+        }
+
+        public void CreateRoom()
+        {
+            MessageBroker.Default.Publish
+                (new EventPlayerNetworkStateChange(PlayerNetworkState.JoiningRoom));
+
+            PhotonNetwork.CreateRoom(null);
+        }
+
+        public void JoinRandomRoom()
+        {
+            MessageBroker.Default.Publish
+                (new EventPlayerNetworkStateChange(PlayerNetworkState.InRoom));
+            PhotonNetwork.JoinRandomRoom();
         }
 
         public override void OnJoinedRoom()
@@ -57,19 +74,12 @@ namespace TopDownShooter.Network {
                 (new EventPlayerNetworkStateChange(PlayerNetworkState.Offline));
         }
 
-        public void CreateRoom()
-        {
-            PhotonNetwork.CreateRoom(null);
-        }
 
-        public void JoinRandomRoom()
-        {
 
-        }
 
         public void Settings()
         {
-
+            Debug.Log("Not Ready Yet");
         }
 
         public override void OnConnectedToMaster()

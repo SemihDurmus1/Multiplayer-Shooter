@@ -1544,6 +1544,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentStateText: {fileID: 1222745456}
+  _networkButtons:
+  - {fileID: 2108429945}
+  - {fileID: 818132139}
+  - {fileID: 1352518593}
 --- !u!114 &1587245307
 MonoBehaviour:
   m_ObjectHideFlags: 0

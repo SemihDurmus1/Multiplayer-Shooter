@@ -22,7 +22,7 @@ namespace TopDownShooter
         public override void Destroy()
         {
             base.Destroy();
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)

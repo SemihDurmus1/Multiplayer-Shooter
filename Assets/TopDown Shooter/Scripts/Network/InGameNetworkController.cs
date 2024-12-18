@@ -38,7 +38,7 @@ namespace TopDownShooter.Network
             var instantiated = Instantiate(_localPlayerPrefab);
             int[] allocatedViewIDArray = new int[instantiated.PhotonViews.Length];
 
-            for (int i = 0; i < allocatedViewIDArray.Length; i++)
+            for (int i = 0; i <= allocatedViewIDArray.Length; i++)
             {
                 allocatedViewIDArray[i] = PhotonNetwork.AllocateSceneViewID();
             }

@@ -64,7 +64,7 @@ namespace TopDownShooter.Network {
 
         public void JoinRandomRoom()
         {
-            CurrentNetworkState = PlayerNetworkState.InRoom; 
+            CurrentNetworkState = PlayerNetworkState.JoiningRoom; 
             PhotonNetwork.JoinRandomRoom();
         }
 

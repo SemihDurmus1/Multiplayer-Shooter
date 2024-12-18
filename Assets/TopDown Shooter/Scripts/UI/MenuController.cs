@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using TopDownShooter.Network;
 using UniRx;
@@ -11,21 +10,35 @@ namespace TopDownShooter.UI
     {
         [SerializeField] private TextMeshProUGUI _currentStateText;
         [SerializeField] private Button[] _networkButtons;
-        
 
+        [SerializeField] private TMP_InputField _nameInputField;
 
         private void Awake()
         {
+            UpdateUIWithNetworkState(MatchMakingController.Instance.CurrentNetworkState);
             MessageBroker.Default.Receive<EventPlayerNetworkStateChange>().Subscribe(OnPlayerNetworkState).AddTo(gameObject);
+
+            _nameInputField.onEndEdit.AddListener(OnEditEnd);
+        }
+
+        private void OnEditEnd(string arg0)
+        {
+            PhotonNetwork.playerName = arg0;
         }
 
         private void OnPlayerNetworkState(EventPlayerNetworkStateChange obj)
         {
-            _currentStateText.text = 
-                "Connection State: " + obj.PlayerNetworkState.ToString();
+            var networkState = obj.PlayerNetworkState;
+            UpdateUIWithNetworkState(networkState);
+        }
+
+        private void UpdateUIWithNetworkState(PlayerNetworkState networkState)
+        {
+            _currentStateText.text =
+                            "Connection State: " + networkState.ToString();
             for (int i = 0; i < _networkButtons.Length; i++)
             {
-                _networkButtons[i].interactable = obj.PlayerNetworkState == PlayerNetworkState.Connected;
+                _networkButtons[i].interactable = networkState == PlayerNetworkState.Connected;
             }
         }
 

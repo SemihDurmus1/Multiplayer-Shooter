@@ -4,11 +4,33 @@ using UniRx;
 using System.Collections;
 
 namespace TopDownShooter.Network {
-    public enum PlayerNetworkState { Offline, Connecting, Connected, JoiningRoom, InRoom}
+    public enum PlayerNetworkState { None, Offline, Connecting, Connected, JoiningRoom, InRoom}
 
     public class MatchMakingController : PunBehaviour
     {
-        [SerializeField] private float _delayToConnect = 3f;
+        private PlayerNetworkState _currentNetworkState = PlayerNetworkState.None;
+        public PlayerNetworkState CurrentNetworkState 
+        {
+            get
+            {
+                return _currentNetworkState;
+            }
+            private set
+            {
+                bool sendEvent = false;
+                if (value != _currentNetworkState)
+                {
+                    sendEvent = true;
+                }
+                _currentNetworkState = value;
+                if (sendEvent)
+                {
+                    MessageBroker.Default.Publish
+                        (new EventPlayerNetworkStateChange(_currentNetworkState));
+                }
+            }
+        }
+
 
         public static MatchMakingController Instance;
 
@@ -18,35 +40,31 @@ namespace TopDownShooter.Network {
         {
             Instance = this;
 
-
+            PhotonNetwork.CacheSendMonoMessageTargets(typeof(MatchMakingController));
 
         }
 
         private IEnumerator Start()
         {
-            MessageBroker.Default.Publish
-                (new EventPlayerNetworkStateChange(PlayerNetworkState.Offline));
+            CurrentNetworkState = PlayerNetworkState.Offline;
 
-            yield return new WaitForSeconds(_delayToConnect);
+            yield return new WaitForEndOfFrame();
 
-            MessageBroker.Default.Publish
-                (new EventPlayerNetworkStateChange(PlayerNetworkState.Connecting));
+            CurrentNetworkState = PlayerNetworkState.Connecting;
 
             PhotonNetwork.ConnectUsingSettings(_networkVersion);
         }
 
         public void CreateRoom()
         {
-            MessageBroker.Default.Publish
-                (new EventPlayerNetworkStateChange(PlayerNetworkState.JoiningRoom));
+            CurrentNetworkState = PlayerNetworkState.JoiningRoom;
 
             PhotonNetwork.CreateRoom(null);
         }
 
         public void JoinRandomRoom()
         {
-            MessageBroker.Default.Publish
-                (new EventPlayerNetworkStateChange(PlayerNetworkState.InRoom));
+            CurrentNetworkState = PlayerNetworkState.InRoom; 
             PhotonNetwork.JoinRandomRoom();
         }
 
@@ -54,40 +72,30 @@ namespace TopDownShooter.Network {
         {
             base.OnJoinedRoom();
 
-            MessageBroker.Default.Publish
-                (new EventPlayerNetworkStateChange(PlayerNetworkState.InRoom));
+            CurrentNetworkState = PlayerNetworkState.InRoom;
+
+            PhotonNetwork.isMessageQueueRunning = false;
         }
 
         public override void OnLeftRoom()
         {
             base.OnLeftRoom();
 
-            MessageBroker.Default.Publish
-                (new EventPlayerNetworkStateChange(PlayerNetworkState.Connected));
+            CurrentNetworkState = PlayerNetworkState.Connected;
         }
 
         public override void OnDisconnectedFromPhoton()
         {
             base.OnDisconnectedFromPhoton();
 
-            MessageBroker.Default.Publish
-                (new EventPlayerNetworkStateChange(PlayerNetworkState.Offline));
-        }
-
-
-
-
-        public void Settings()
-        {
-            Debug.Log("Not Ready Yet");
+            CurrentNetworkState = PlayerNetworkState.Offline;
         }
 
         public override void OnConnectedToMaster()
         {
             base.OnConnectedToMaster();
 
-            MessageBroker.Default.Publish
-                (new EventPlayerNetworkStateChange(PlayerNetworkState.Connected));
+            CurrentNetworkState = PlayerNetworkState.Connected;
 
             Debug.Log("Connected to Master");
         }
@@ -97,8 +105,11 @@ namespace TopDownShooter.Network {
             base.OnJoinedLobby();
 
             Debug.Log("On Joined Lobby");
+        }
 
-            
+        public void Settings()
+        {
+            Debug.Log("Not Ready Yet");
         }
     }
 }

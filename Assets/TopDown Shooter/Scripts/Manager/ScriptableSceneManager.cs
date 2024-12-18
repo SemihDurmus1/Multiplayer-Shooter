@@ -16,13 +16,20 @@ namespace TopDownShooter
             base.Initialize();
             SceneManager.LoadScene(_menuScene);
             MessageBroker.Default.Receive<EventPlayerNetworkStateChange>().Subscribe(OnPlayerNetworkState).AddTo(_compositeDisposable);
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
-
-
         public override void Destroy()
         {
             base.Destroy();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
+
+        private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+        {
+            MessageBroker.Default.Publish(new EventSceneLoaded(arg0.name));
+        }
+
         private void OnPlayerNetworkState(EventPlayerNetworkStateChange obj)
         {
             //When network state change
@@ -43,6 +50,7 @@ namespace TopDownShooter
                     break;
 
                 case PlayerNetworkState.InRoom:
+                    PhotonNetwork.isMessageQueueRunning = false;
                     SceneManager.LoadScene(_gameScene);
                     break;
 

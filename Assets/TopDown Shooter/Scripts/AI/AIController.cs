@@ -15,7 +15,7 @@ namespace TopDownShooter.AI
 
         [SerializeField] private TowerRotationController _playerTowerRotationController;
 
-        private void Awake()
+        private void Start()
         {
             //creating a new one
             _aiMovementInput = Instantiate(_aiMovementInput);

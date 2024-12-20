@@ -1,5 +1,6 @@
 using System.Collections;
 using TopDownShooter.Inventory;
+using UniRx;
 using UnityEngine;
 
 namespace TopDownShooter.Stat
@@ -10,8 +11,8 @@ namespace TopDownShooter.Stat
 
         [SerializeField] private Collider _collider;
 
-        
-        public float Health = 100;
+        public PlayerStat PLayerStat { get; set; }
+
         public float Armor = 20;
 
         private Vector3 _defaultScale;
@@ -39,34 +40,13 @@ namespace TopDownShooter.Stat
                 StartCoroutine(TimeBasedDamage
                     (dmg.TimeBasedDamage, dmg.TimeBasedDamageDuration));
             }
-            if (Armor > 0)
-            {
-                Armor -= (dmg.Damage * dmg.ArmorPenetration);
-            }
             else
             {
-                Health -= dmg.Damage;
-
-                Health += Armor;
-                //Debug.Log(gameObject.name + " damaged " + dmg.Damage + " current health: " + Health);
-                CheckHealth();
+                PLayerStat.Damage(dmg);
             }
         }
 
-        private void CheckHealth()
-        {
-            if (_isDead)
-            {
-                return;
-            }
-            if (Health <= 0)
-            {
-                StopAllCoroutines();
-                _isDead = true;
-                //OnDeath.Execute();
-                Destroy();
-            }
-        }
+        
 
         IEnumerator TimeBasedDamage(float damage, float totalDuration)
         {
@@ -75,11 +55,15 @@ namespace TopDownShooter.Stat
                 yield return new WaitForSeconds(1);//Magic Number
 
                 totalDuration -= 1;
-                Health -= damage;
 
-                CheckHealth();
+                PLayerStat.Damage(damage);
             }
 
+        }
+
+        public void SetStat(PlayerStat stat)
+        {
+            PLayerStat = stat;
         }
     }
 }

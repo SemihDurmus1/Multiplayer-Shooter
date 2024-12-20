@@ -1,4 +1,5 @@
 using System;
+using TopDownShooter.Inventory;
 using UniRx;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace TopDownShooter.Network
         private void Awake()
         {
             MessageBroker.Default.Receive<EventSceneLoaded>().Subscribe(OnSceneLoaded).AddTo(gameObject);
+            MessageBroker.Default.Receive<EventPlayerShoot>().Subscribe(OnPlayerShoot).AddTo(gameObject);
         }
 
         private void OnSceneLoaded(EventSceneLoaded obj)
@@ -30,6 +32,14 @@ namespace TopDownShooter.Network
                 default:
                     _inGameNetworkState = InGameNetworkState.NotReady;
                     break;
+            }
+        }
+
+        private void OnPlayerShoot(EventPlayerShoot obj)
+        {
+            if (obj.ShooterID == PhotonNetwork.player.ID)
+            {
+                Shoot(obj.Origin);
             }
         }
 
@@ -57,5 +67,17 @@ namespace TopDownShooter.Network
 
             instantiated.SetOwnership(photonMessageInfo.sender, viewIDArray);
         }
+
+        public void Shoot(Vector3 origin)
+        {
+            photonView.RPC(nameof(RPC_Shoot), PhotonTargets.Others, origin);
+        }
+
+        [PunRPC]
+        public void RPC_Shoot(Vector3 origin, PhotonMessageInfo photonMessageInfo)
+        {
+            MessageBroker.Default.Publish(new EventPlayerShoot(origin, photonMessageInfo.sender.ID));
+        }
+
     }
 }

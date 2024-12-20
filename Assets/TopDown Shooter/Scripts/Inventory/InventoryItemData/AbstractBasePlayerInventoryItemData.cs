@@ -5,7 +5,7 @@ namespace TopDownShooter.Inventory
 {
     public abstract class AbstractBasePlayerInventoryItemData : ScriptableObject
     {
-        private PlayerInventoryController _inventoryController;//Its using, ignore the pale gray, and do not delete it.
+        protected PlayerInventoryController _inventoryController;//Its using, ignore the pale gray, and do not delete it.
         protected CompositeDisposable _compositeDisposable;
         public virtual void Initialize(PlayerInventoryController targetPlayerInventory)
         {

@@ -19,12 +19,12 @@ namespace TopDownShooter.Inventory
             //Debug.Log("scriptable shoot manager destroyed");
         }
 
-        public void Shoot(Vector3 origin, Vector3 direction, IDamage damage)
+        public void Shoot(Vector3 origin, Vector3 direction, IDamage damage, int shooterID)
         {
             RaycastHit rHit;
             var physic = Physics.Raycast(origin, direction, out rHit);
 
-            MessageBroker.Default.Publish(new EventPlayerShoot(origin));
+            MessageBroker.Default.Publish(new EventPlayerShoot(origin, shooterID));
 
             if (physic)
             {

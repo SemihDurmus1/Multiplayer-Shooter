@@ -4,7 +4,16 @@ using UniRx;
 using System.Collections;
 
 namespace TopDownShooter.Network {
-    public enum PlayerNetworkState { None, Offline, Connecting, Connected, JoiningRoom, InRoom}
+    public enum PlayerNetworkState 
+    {
+        None,
+        Offline,
+        Connecting,
+        Connected,
+        JoiningRoom,
+        InRoom,
+        LeavingRoom
+    }
 
     public class MatchMakingController : PunBehaviour
     {
@@ -64,8 +73,14 @@ namespace TopDownShooter.Network {
 
         public void JoinRandomRoom()
         {
-            CurrentNetworkState = PlayerNetworkState.JoiningRoom; 
+            CurrentNetworkState = PlayerNetworkState.JoiningRoom;
             PhotonNetwork.JoinRandomRoom();
+        }
+
+        public void LeaveRoom()
+        {
+            CurrentNetworkState = PlayerNetworkState.LeavingRoom;
+            PhotonNetwork.LeaveRoom();
         }
 
         public override void OnJoinedRoom()

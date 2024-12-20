@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7236197373781471222}
   - component: {fileID: 8358642595959957017}
   - component: {fileID: 3878802567111355249}
+  - component: {fileID: 4051900123012746915}
   - component: {fileID: 4832451882860901303}
   - component: {fileID: 5181330354101039919}
   m_Layer: 6
@@ -97,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 8358642595959957017}
-  Health: 100
   Armor: 20
 --- !u!65 &8358642595959957017
 BoxCollider:
@@ -135,6 +135,22 @@ MonoBehaviour:
   _photonViewsForOwnership:
   - {fileID: 4832451882860901303}
   - {fileID: 1192720729180930701}
+--- !u!114 &4051900123012746915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485891082896211765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b17bdbee98a6244c87e9afffea46844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageableObjectBases:
+  - {fileID: 7236197373781471222}
+  _networkPlayer: {fileID: 3878802567111355249}
+  _inventoryController: {fileID: 5034760196225513312}
 --- !u!114 &4832451882860901303
 MonoBehaviour:
   m_ObjectHideFlags: 0

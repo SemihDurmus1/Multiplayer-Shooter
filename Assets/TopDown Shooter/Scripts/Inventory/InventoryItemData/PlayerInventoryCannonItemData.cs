@@ -60,7 +60,7 @@ namespace TopDownShooter.Inventory
             Debug.Log("Shoot Started");
             if (Time.time - _lastShootTime > _rpm)
             {
-                _instantiated.Shoot(this);
+                _instantiated.Shoot(this, _inventoryController.playerStat.ID);
                 _lastShootTime = Time.time;
             }
             else

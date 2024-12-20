@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace TopDownShooter
 {
-    public class LocalPlayerController : MonoBehaviour
+    public class LocalPlayerController : PlayerController
     {
-        [SerializeField] private PlayerInventoryController _inventoryController;
         [SerializeField] private AbstractInputData _shootInput;
 
         private void Update()

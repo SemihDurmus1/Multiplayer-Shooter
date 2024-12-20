@@ -227,6 +227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b6dd541895f8248aad8ed2c53a9fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageableObjectBases:
+  - {fileID: 4454730666289532794}
+  _networkPlayer: {fileID: -7767362210808172984}
   _inventoryController: {fileID: 7164595412735260092}
   _shootInput: {fileID: 11400000, guid: 21e6b05e12cd53f4a8a21355bb76ec12, type: 2}
 --- !u!114 &6679998889166591527
@@ -301,7 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 5668730959365448397}
-  Health: 100
   Armor: 20
 --- !u!65 &5668730959365448397
 BoxCollider:

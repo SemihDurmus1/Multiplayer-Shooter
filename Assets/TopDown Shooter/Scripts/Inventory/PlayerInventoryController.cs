@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using TopDownShooter.Stat;
 using UniRx;
 using UnityEngine;
 
 namespace TopDownShooter.Inventory
 {
-    public class PlayerInventoryController : MonoBehaviour
+    public class PlayerInventoryController : MonoBehaviour, IPlayerStatHolder
     {
         [SerializeField] private AbstractBasePlayerInventoryItemData[] _inventoryItemDataArray;
         private List<AbstractBasePlayerInventoryItemData> _instantiatedItemDataList;
@@ -14,16 +15,13 @@ namespace TopDownShooter.Inventory
 
         public ReactiveCommand ReactiveShootCommand { get; private set; }
 
+        public PlayerStat playerStat { get; private set; }
+
         private void Start()
         {
             //FOR TESTING PURPOSES ONLY
             InitializeInventory(_inventoryItemDataArray);
         }
-        private void Update()
-        {
-
-        }
-
         private void OnDestroy()
         {
             ClearInventory();
@@ -62,6 +60,9 @@ namespace TopDownShooter.Inventory
             }
         }
 
-
+        public void SetStat(PlayerStat stat)
+        {
+            playerStat = stat;
+        }
     }
 }

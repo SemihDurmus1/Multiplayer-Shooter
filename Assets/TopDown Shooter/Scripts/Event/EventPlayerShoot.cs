@@ -1,3 +1,4 @@
+using TopDownShooter.Stat;
 using UnityEngine;
 
 namespace TopDownShooter.Inventory
@@ -5,12 +6,12 @@ namespace TopDownShooter.Inventory
     public struct EventPlayerShoot
     {
         public Vector3 Origin;
-        public int ShooterID;
+        public PlayerStat Stat;
 
-        public EventPlayerShoot(Vector3 origin, int shooterID)
+        public EventPlayerShoot(Vector3 origin, PlayerStat stat)
         {
             Origin = origin;
-            ShooterID = shooterID;
+            Stat = stat;
         }
     }
 }

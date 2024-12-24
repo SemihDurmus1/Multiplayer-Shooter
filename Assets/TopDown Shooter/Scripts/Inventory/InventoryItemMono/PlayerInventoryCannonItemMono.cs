@@ -1,3 +1,4 @@
+using TopDownShooter.Stat;
 using UnityEngine;
 
 namespace TopDownShooter.Inventory
@@ -6,9 +7,9 @@ namespace TopDownShooter.Inventory
     {
         [SerializeField] private Transform _cannonShootPoint;
 
-        public void Shoot(IDamage damage, int shooterID)
+        public void Shoot(IDamage damage, PlayerStat stat)
         {
-            ScriptableShootManager.Instance.Shoot(_cannonShootPoint.position, _cannonShootPoint.forward, damage, shooterID);
+            ScriptableShootManager.Instance.Shoot(_cannonShootPoint.position, _cannonShootPoint.forward, damage, stat);
         }
 
         private void OnDrawGizmos()

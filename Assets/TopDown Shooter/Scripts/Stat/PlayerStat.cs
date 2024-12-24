@@ -8,6 +8,7 @@ namespace TopDownShooter.Stat
     public class PlayerStat : IDamageable, IPlayerStatHolder
     {
         public int ID { get; private set; }
+        public bool IsLocalPlayer { get; private set; }
 
         public int InstanceID { get; private set; } = -1;
 
@@ -21,9 +22,11 @@ namespace TopDownShooter.Stat
 
         private bool _isDead;
 
-        public PlayerStat(int id)
+        public PlayerStat(int id, bool isLocalPlayer)
         {
             ID = id;
+            IsLocalPlayer = isLocalPlayer;
+            ScriptableStatManager.Instance.RegisterStat(this);
         }
 
         public void Damage(IDamage dmg)
@@ -40,9 +43,10 @@ namespace TopDownShooter.Stat
                 //Debug.Log(gameObject.name + " damaged " + dmg.Damage + " current health: " + Health);
                 CheckHealth();
             }
+            MessageBroker.Default.Publish(new EventPlayerGiveDamage(dmg.Damage, this, dmg.Stat));
         }
 
-        public void Damage(float dmg)
+        public void Damage(float dmg, PlayerStat shooter)
         {
             if (Armor.Value > 0)
             {
@@ -56,6 +60,7 @@ namespace TopDownShooter.Stat
                 //Debug.Log(gameObject.name + " damaged " + dmg.Damage + " current health: " + Health);
                 CheckHealth();
             }
+            MessageBroker.Default.Publish(new EventPlayerGiveDamage(dmg, this, shooter));
         }
 
         private void CheckHealth()

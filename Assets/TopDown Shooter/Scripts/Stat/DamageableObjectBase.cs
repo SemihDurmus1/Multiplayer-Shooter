@@ -38,7 +38,7 @@ namespace TopDownShooter.Stat
             if (dmg.TimeBasedDamage > 0)
             {
                 StartCoroutine(TimeBasedDamage
-                    (dmg.TimeBasedDamage, dmg.TimeBasedDamageDuration));
+                    (dmg.TimeBasedDamage, dmg.TimeBasedDamageDuration, dmg.Stat));
             }
             else
             {
@@ -48,7 +48,7 @@ namespace TopDownShooter.Stat
 
         
 
-        IEnumerator TimeBasedDamage(float damage, float totalDuration)
+        IEnumerator TimeBasedDamage(float damage, float totalDuration, PlayerStat playerStat)
         {
             while (totalDuration > 0)
             {
@@ -56,7 +56,7 @@ namespace TopDownShooter.Stat
 
                 totalDuration -= 1;
 
-                PLayerStat.Damage(damage);
+                PLayerStat.Damage(damage, playerStat);
             }
 
         }

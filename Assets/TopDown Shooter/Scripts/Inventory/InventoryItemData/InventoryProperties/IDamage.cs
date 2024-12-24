@@ -1,3 +1,6 @@
+using TopDownShooter.Stat;
+using UnityEditor;
+
 namespace TopDownShooter.Inventory
 {
     public interface IDamage
@@ -7,5 +10,7 @@ namespace TopDownShooter.Inventory
 
         float TimeBasedDamage { get; }
         float TimeBasedDamageDuration {  get; }
+
+        PlayerStat Stat { get; }
     }
 }
